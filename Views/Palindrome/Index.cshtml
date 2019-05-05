@@ -1,0 +1,45 @@
+﻿@model SampleApplication.Models.PalindromeViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Palindrome Checker</h2>
+
+@if (ViewBag.ShowPalindromeMessage == true)
+{
+    if (Model.IsPalindrome)
+    {
+        <div class="alert alert-success">
+            Number submitted is a palindrome.
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            Number submitted is not a palindrome.
+        </div>
+    }
+}
+
+
+@using (Html.BeginForm("Index", "Palindrome", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.IsPalindrome)
+
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Number, new { @class="col-md-12 control-label" })
+        @Html.ValidationMessageFor(x => x.Number, "", new { style = "color: red;", @class = "col-md-12 control-label" })
+        <div class="col-md-12">
+            @Html.TextBoxFor(x => x.Number, new { @class = "form-control input-md", type = "number" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+    </div>
+}
+
